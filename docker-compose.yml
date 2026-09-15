@@ -1,0 +1,16 @@
+services:
+  qnotes:
+    build: .
+    image: qnotes:latest
+    container_name: qnotes
+    ports:
+      - "${PORT:-8443}:8443"
+    environment:
+      - PORT=8443
+      - PUBLIC_HOST=${PUBLIC_HOST:-}
+    volumes:
+      - qnotes-certs:/data
+    restart: unless-stopped
+
+volumes:
+  qnotes-certs:
