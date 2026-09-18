@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f2f4f8">
+  <title>QNotes — просмотр записки</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+
+  <main class="shell enter">
+    <header class="top">
+      <div class="brand-mark" aria-hidden="true"></div>
+      <div>
+        <h1>QNotes</h1>
+        <p class="lead">Защищённый просмотр</p>
+      </div>
+    </header>
+
+    <section id="ready" class="glass panel-view">
+      <div class="lock" aria-hidden="true"></div>
+      <h2 class="sheet-title">Записка готова</h2>
+      <p class="sheet-text">Текст покажется один раз и сразу уничтожится. Нажмите, когда будете готовы скопировать его.</p>
+      <button type="button" id="reveal-btn" class="btn btn-primary btn-press">
+        <span class="btn-label">Показать</span>
+        <span class="btn-spinner" aria-hidden="true"></span>
+      </button>
+    </section>
+
+    <section id="content" class="glass panel-view hidden" aria-live="polite">
+      <div class="sheet-icon ok-icon" aria-hidden="true"></div>
+      <h2 class="sheet-title">Содержимое</h2>
+      <p class="sheet-text warn">Сохраните сейчас — повторно открыть нельзя.</p>
+      <pre id="plaintext"></pre>
+      <a class="btn btn-secondary btn-press back-btn" href="/">Создать свою</a>
+    </section>
+
+    <section id="gone" class="glass panel-view hidden">
+      <div class="sheet-icon err-icon" aria-hidden="true"></div>
+      <h2 class="sheet-title">Уже недоступна</h2>
+      <p class="sheet-text">Записка не найдена или уже была прочитана.</p>
+      <a class="btn btn-secondary btn-press back-btn" href="/">На главную</a>
+    </section>
+
+    <p id="error" class="banner error hidden" role="alert"></p>
+  </main>
+
+  <script src="/static/crypto.js"></script>
+  <script src="/static/view.js"></script>
+</body>
+</html>

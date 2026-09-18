@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f2f4f8">
+  <title>QNotes — одноразовая записка</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+
+  <main class="shell enter">
+    <header class="top">
+      <div class="brand-mark" aria-hidden="true"></div>
+      <div>
+        <h1>QNotes</h1>
+        <p class="lead">Одноразовая записка с шифрованием в браузере</p>
+      </div>
+    </header>
+
+    <nav class="seg" role="tablist" aria-label="Разделы">
+      <div class="seg-pill" id="main-pill"></div>
+      <button type="button" class="seg-btn active" role="tab" aria-selected="true" data-tab="create">Создать</button>
+      <button type="button" class="seg-btn" role="tab" aria-selected="false" data-tab="about">Как работает</button>
+    </nav>
+
+    <section id="tab-create" class="glass tab-panel active" role="tabpanel">
+      <form id="create-form" class="stack">
+        <div class="field">
+          <label for="text">Текст записки</label>
+          <textarea id="text" rows="7" maxlength="8192" placeholder="Пароль, токен или другая чувствительная информация…" required></textarea>
+        </div>
+
+        <div class="field">
+          <span class="label">Срок жизни</span>
+          <div class="chips" id="ttl-chips" role="radiogroup" aria-label="Срок жизни">
+            <button type="button" class="chip active" role="radio" aria-checked="true" data-ttl="once">До просмотра</button>
+            <button type="button" class="chip" role="radio" aria-checked="false" data-ttl="5m">5 мин</button>
+            <button type="button" class="chip" role="radio" aria-checked="false" data-ttl="1h">1 час</button>
+            <button type="button" class="chip" role="radio" aria-checked="false" data-ttl="1d">1 день</button>
+          </div>
+          <input type="hidden" id="ttl" value="once">
+        </div>
+
+        <button type="submit" id="submit-btn" class="btn btn-primary btn-press">
+          <span class="btn-label">Создать ссылку</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+
+      <div id="result" class="sheet hidden" aria-live="polite">
+        <div class="sheet-icon ok-icon" aria-hidden="true"></div>
+        <h2 class="sheet-title">Готово</h2>
+        <p class="sheet-text">Отправьте ссылку получателю. После первого просмотра записка исчезнет.</p>
+        <div class="link-row">
+          <input type="text" id="share-link" readonly aria-label="Ссылка на записку">
+          <button type="button" id="copy-btn" class="btn btn-secondary btn-press">Копировать</button>
+        </div>
+        <p class="hint">Ключ шифрования только в фрагменте URL (#…) и не уходит на сервер.</p>
+        <button type="button" id="new-note-btn" class="btn btn-ghost btn-press">Новая записка</button>
+      </div>
+
+      <p id="error" class="banner error hidden" role="alert"></p>
+    </section>
+
+    <section id="tab-about" class="glass tab-panel" role="tabpanel" hidden>
+      <ol class="steps">
+        <li>
+          <strong>Шифрование у вас</strong>
+          <span>Текст шифруется AES-GCM в браузере до отправки.</span>
+        </li>
+        <li>
+          <strong>Сервер слеп</strong>
+          <span>Хранится только шифротекст. Ключ — в ссылке после #.</span>
+        </li>
+        <li>
+          <strong>Один просмотр</strong>
+          <span>После «Показать» запись удаляется навсегда.</span>
+        </li>
+      </ol>
+      <p class="hint tight">Память процесса: перезапуск сервера очищает все записки.</p>
+    </section>
+  </main>
+
+  <script src="/static/crypto.js"></script>
+  <script src="/static/create.js"></script>
+</body>
+</html>
